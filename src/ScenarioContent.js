@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 
-import './App.css';
+import { FormGroup } from 'react-bootstrap';
+
 import Step from './Step';
-import EditableTitle from './EditableTitle';
-import ScenarioContent from './ScenarioContent';
 
-import { Navbar, FormGroup } from 'react-bootstrap';
-
-class App extends Component {
+class ScenarioContent extends Component {
 
     constructor(props) {
         super(props);
@@ -15,10 +12,11 @@ class App extends Component {
             steps: [{id: 1, label:"Zakładając, że"}, {id: 10, label: "Gdy"}, {id: 100, label:"Wtedy"}],
             focusIndex: 0,
         }
+
         this.onArrow = this.onArrow.bind(this);
         this.addStep = this.addStep.bind(this);
         this.deleteStep = this.deleteStep.bind(this);
-        this.renderStep = this.renderStep.bind(this);
+        this.getAutoFocus = this.getAutoFocus.bind(this);
     }
 
     findIndex(id) {
@@ -110,43 +108,29 @@ class App extends Component {
             this.moveCursor(currentId, e.key);
         }
     };
-   
-    renderStep(step, i) {
-        var autoFocus = false;
-        
-        if (i === this.state.focusIndex) {
-            autoFocus = true;
-        } else {
-            autoFocus = false;
-        }
-        return (
-                <FormGroup key={"group" + step.id }>
-                    <Step key={ step.id } id={ step.id } ref={ "item" + step.id } label={ step.label } onEnter={ this.addStep } onArrow={ this.onArrow } onDelete={ this.deleteStep } autoFocus={ autoFocus } />
-                </FormGroup>
-        );
-    }
 
-    renderSteps() {
-        return this.state.steps.map(this.renderStep)
+    getAutoFocus(i) {
+        if (i === this.state.focusIndex) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     render() {
-       return (
-             <div className="App">
-                <Navbar>
-                    <Navbar.Header>
-                    </Navbar.Header>
-                    <Navbar.Collapse>
-                        <h1>Scenario creator</h1>
-                        <FormGroup>
-                            <EditableTitle />
-                        </FormGroup>
-                    </Navbar.Collapse>
-                </Navbar>
-                <ScenarioContent />
-            </div>
-                );
+        return (
+                  <div>
+                    { this.state.steps.map((step, i) => {
+                        return (
+                            <FormGroup key={"group" + step.id }>
+                                <Step key={ step.id } id={ step.id } ref={ "item" + step.id } label={ step.label } onEnter={ this.addStep } onArrow={ this.onArrow } onDelete={ this.deleteStep } autoFocus={ this.getAutoFocus } />
+                            </FormGroup>
+                        )
+                      })
+                    }
+                  </div>
+               )
     }
 }
 
-export default App;
+export default ScenarioContent;
