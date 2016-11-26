@@ -80,3 +80,9 @@ it('onArrow called with target', () => {
     expect(onArrow.calledWith(target.target)).to.be.true;
 });
 
+it('propagate value', () => {
+    const wrapper = mount(<Step value="test" />);
+
+    expect(wrapper.find(FormControl).props().defaultValue).to.equal("test");
+});
+

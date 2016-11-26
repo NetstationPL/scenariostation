@@ -29,7 +29,7 @@ class Step extends Component {
                    <ControlLabel bsSize="large" bsStyle="primary">{ this.props.label }</ControlLabel>
                 </Col>
                 <Col md={8}>
-                    <FormControl type="text" bsSize="medium" ref="stepInput" onKeyDown={ this.handleArrow.bind(this) } onKeyPress={ this.handleKey.bind(this) } autoFocus={ this.props.autoFocus }/>
+                    <FormControl type="text" bsSize="medium" ref="stepInput" onKeyDown={ this.handleArrow.bind(this) } onKeyPress={ this.handleKey.bind(this) } autoFocus={ this.props.autoFocus } defaultValue={ this.props.value } />
                 </Col>
             </Row>
         )

@@ -132,7 +132,7 @@ class ScenarioContent extends Component {
                     { this.state.steps.map((step, i) => {
                         return (
                             <FormGroup key={"group" + step.id }>
-                                <Step key={ "step" + step.id } id={ step.id } ref={ "item" + step.id } label={ step.label } onEnter={ this.addStep } onArrow={ this.onArrow } onDelete={ this.deleteStep } autoFocus={ this.getAutoFocus(i) } />
+                                <Step key={ "step" + step.id } id={ step.id } ref={ "item" + step.id } label={ step.label } onEnter={ this.addStep } onArrow={ this.onArrow } onDelete={ this.deleteStep } autoFocus={ this.getAutoFocus(i) } value={ step.value } />
                             </FormGroup>
                         )
                       })

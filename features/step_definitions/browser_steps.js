@@ -12,10 +12,11 @@ module.exports = function () {
     });
   });
 
-  this.Then('I should see filled inputs', function (callback) {
-      this.driver.findElements(seleniumWebdriver.By.xpath("//input[string-length(text()) > 0]")).then(
+  this.Then('I should see filled inputs', function () {
+      this.driver.findElements(seleniumWebdriver.By.xpath("//input[not(@value='')]")).then(
         function(elms) {
-            chai.expect(elms.length).to.equal(3);
+            expect(elms.length).to.equal(3);
         });
+       
   });
 };

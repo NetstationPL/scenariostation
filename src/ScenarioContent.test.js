@@ -204,3 +204,10 @@ it("steps from props", () => {
 
     expect(wrapper.state("steps")).eql(steps);
 });
+
+it("propagate value to step", () => {
+    const steps = [{id: 1, value: "test"},];
+    const wrapper = shallow(<ScenarioContent steps={ steps }/>);
+
+    expect(wrapper.find(Step).first().prop("value")).to.equal("test");
+});
