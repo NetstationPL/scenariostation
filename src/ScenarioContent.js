@@ -8,8 +8,11 @@ class ScenarioContent extends Component {
 
     constructor(props) {
         super(props);
+        
+        var defaultSteps = [{id: 1, label:"Zakładając, że"}, {id: 10, label: "Gdy"}, {id: 100, label:"Wtedy"}];
+
         this.state = {
-            steps: [{id: 1, label:"Zakładając, że"}, {id: 10, label: "Gdy"}, {id: 100, label:"Wtedy"}],
+            steps: props.steps?props.steps:defaultSteps,            
             focusIndex: 0,
         }
 
@@ -19,6 +22,12 @@ class ScenarioContent extends Component {
         this.getAutoFocus = this.getAutoFocus.bind(this);
     }
 
+    componentWillReceiveProps(obj) {
+        if (obj.steps) {
+            this.setState({steps: obj.steps});
+        }
+    }
+    
     findIndex(id) {
         return this.state.steps.map(function(elm, i) {
             if (elm.id === id) {
@@ -123,7 +132,7 @@ class ScenarioContent extends Component {
                     { this.state.steps.map((step, i) => {
                         return (
                             <FormGroup key={"group" + step.id }>
-                                <Step key={ step.id } id={ step.id } ref={ "item" + step.id } label={ step.label } onEnter={ this.addStep } onArrow={ this.onArrow } onDelete={ this.deleteStep } autoFocus={ this.getAutoFocus } />
+                                <Step key={ "step" + step.id } id={ step.id } ref={ "item" + step.id } label={ step.label } onEnter={ this.addStep } onArrow={ this.onArrow } onDelete={ this.deleteStep } autoFocus={ this.getAutoFocus(i) } />
                             </FormGroup>
                         )
                       })

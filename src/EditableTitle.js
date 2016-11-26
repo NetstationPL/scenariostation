@@ -8,7 +8,7 @@ class EditableTitle extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: '',
+            value: props.title?props.title:'',
             title_edit: false
         }
         

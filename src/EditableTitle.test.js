@@ -10,8 +10,8 @@ import sinon from 'sinon';
 import EditableTitle from "./EditableTitle";
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<EditableTitle />, div);
+    const div = document.createElement('div');
+    ReactDOM.render(<EditableTitle />, div);
 });
 
 it('title shows', () => {
@@ -168,4 +168,11 @@ it('title empty', () => {
     wrapper.setState({value: title});
 
     expect(wrapper.instance().getTitle()).to.equal(wrapper.instance().altTitle);
+});
+
+it("gets title", () => {
+    const title = "Test title";
+    const wrapper = shallow(<EditableTitle title={ title } />);
+
+    expect(wrapper.state("value")).to.equal(title);
 });

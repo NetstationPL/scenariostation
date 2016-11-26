@@ -19,7 +19,7 @@ it('show 3 steps', () => {
   expect(wrapper.find(Step).length).to.equal(3);
 });
 
-it('has 3 steps', () => {
+it('has 3 default steps', () => {
   const wrapper = shallow(<ScenarioContent />);
 
   expect(wrapper.state().steps.length).to.equal(3);
@@ -186,10 +186,21 @@ it("check focus index", () => {
 });
 
 it("auto focus connected", () => {
-    const wrapper = mount(<ScenarioContent />);
-   
+    const wrapper = shallow(<ScenarioContent />);
+    wrapper.setState({
+        steps: [{id: 1,}, {id: 2}],
+        focusIndex: 1
+    });
+    
     var steps = wrapper.find(Step);
+    
+    expect(steps.nodes[0].props.autoFocus).to.be.false;
+    expect(steps.nodes[1].props.autoFocus).to.be.true;
+});
 
-    expect(steps.nodes[0].props.autoFocus).to.equal(wrapper.instance().getAutoFocus);
-    expect(steps.nodes[1].props.autoFocus).to.equal(wrapper.instance().getAutoFocus);
+it("steps from props", () => {
+    const steps = [{id: 1}, {id: 2}, {id: 3}];
+    const wrapper = shallow(<ScenarioContent steps={ steps }/>);
+
+    expect(wrapper.state("steps")).eql(steps);
 });

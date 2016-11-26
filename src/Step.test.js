@@ -12,7 +12,7 @@ it('renders without crashing', () => {
   ReactDOM.render(<Step />, div);
 });
 
-it('onenter', () => {
+it('onenter connected', () => {
   const onEnter = sinon.spy();
 
   const wrapper = shallow(
@@ -22,7 +22,7 @@ it('onenter', () => {
    expect(onEnter).to.have.property('callCount', 1);
 });
 
-it('ondelete', () => {
+it('ondelete connected', () => {
   const onDelete = sinon.spy();
 
   const wrapper = shallow(
@@ -32,7 +32,7 @@ it('ondelete', () => {
    expect(onDelete).to.have.property('callCount', 1);
 });
 
-it('ondelete without ctrl', () => {
+it('ondelete without ctrl connected', () => {
   const onDelete = sinon.spy();
 
   const wrapper = shallow(
@@ -42,7 +42,7 @@ it('ondelete without ctrl', () => {
    expect(onDelete).to.have.property('callCount', 0);
 });
 
-it('onarrow up', () => {
+it('onarrow up connected', () => {
   const onArrow = sinon.spy();
 
   const wrapper = shallow(
@@ -52,7 +52,7 @@ it('onarrow up', () => {
    expect(onArrow).to.have.property('callCount', 1);
 });
 
-it('onarrow down', () => {
+it('onarrow down connected', () => {
   const onArrow = sinon.spy();
 
   const wrapper = shallow(
@@ -79,3 +79,4 @@ it('onArrow called with target', () => {
 
     expect(onArrow.calledWith(target.target)).to.be.true;
 });
+
