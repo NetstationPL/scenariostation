@@ -93,3 +93,14 @@ it('handleChange', () => {
 
     expect(wrapper.state('value')).to.equal('test2');
 });
+
+it("when above 3 signs run autocomplete", () => {
+    const wrapper = shallow(<Step />);
+    
+    const autocomplete = sinon.spy();
+
+    wrapper.instance().autocomplete = autocomplete;
+    wrapper.instance().handleKey({target: {value: "alama"}});
+
+    expect(autocomplete).to.have.property('callCount', 1);
+});

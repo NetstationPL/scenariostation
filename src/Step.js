@@ -22,6 +22,9 @@ class Step extends Component {
         } else if (e.key === "delete" && e.ctrlKey) {
             this.props.onDelete(this.props.id);
         }
+        if (e.target && e.target.value.length > 3) {
+            this.autocomplete(e.target.value);
+        }
     };
 
     handleArrow(e) {
