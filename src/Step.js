@@ -4,6 +4,18 @@ import ReactDOM from 'react-dom';
 import { FormControl, Col, ControlLabel, Row } from 'react-bootstrap';
 
 class Step extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {value: props.value?props.value:''};
+    }
+    
+    componentWillReceiveProps(obj) {
+        if (obj.value) {
+            this.setState({value: obj.value});
+        }
+    }
+ 
     handleKey(e) {
         if (e.key === "Enter") {
             this.props.onEnter(this.props.id);
@@ -22,6 +34,10 @@ class Step extends Component {
         ReactDOM.findDOMNode(this.refs.stepInput).focus();
     };
 
+    handleChange(e) {
+        this.setState({value: e.target.value});
+    }
+
     render() {
         return (
             <Row>
@@ -29,7 +45,7 @@ class Step extends Component {
                    <ControlLabel bsSize="large" bsStyle="primary">{ this.props.label }</ControlLabel>
                 </Col>
                 <Col md={8}>
-                    <FormControl type="text" bsSize="medium" ref="stepInput" onKeyDown={ this.handleArrow.bind(this) } onKeyPress={ this.handleKey.bind(this) } autoFocus={ this.props.autoFocus } defaultValue={ this.props.value } />
+                    <FormControl type="text" bsSize="medium" ref="stepInput" onKeyDown={ this.handleArrow.bind(this) } onKeyPress={ this.handleKey.bind(this) } autoFocus={ this.props.autoFocus } value={ this.state.value } onChange={ this.handleChange.bind(this) }/>
                 </Col>
             </Row>
         )

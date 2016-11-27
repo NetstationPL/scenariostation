@@ -83,6 +83,13 @@ it('onArrow called with target', () => {
 it('propagate value', () => {
     const wrapper = mount(<Step value="test" />);
 
-    expect(wrapper.find(FormControl).props().defaultValue).to.equal("test");
+    expect(wrapper.find(FormControl).props().value).to.equal("test");
 });
 
+it('handleChange', () => {
+    const wrapper = shallow(<Step value="test" />);
+
+    wrapper.instance().handleChange({target: {value: 'test2'}});
+
+    expect(wrapper.state('value')).to.equal('test2');
+});
