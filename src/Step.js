@@ -22,14 +22,19 @@ class Step extends Component {
         } else if (e.key === "delete" && e.ctrlKey) {
             this.props.onDelete(this.props.id);
         }
-        if (e.target && e.target.value.length > 3) {
-            this.autocomplete(e.target.value);
-        }
     };
+
+    autocomplete(text) {
+        console.log(text);
+    }
 
     handleArrow(e) {
         if (e.key === "ArrowUp" || e.key === "ArrowDown") {
             this.props.onArrow(this.props.id, e);
+        }
+
+        if (e.target && e.target.value.length > 3) {
+            this.autocomplete(e.target.value + e.key);
         }
     };
 

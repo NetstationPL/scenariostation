@@ -100,7 +100,7 @@ it("when above 3 signs run autocomplete", () => {
     const autocomplete = sinon.spy();
 
     wrapper.instance().autocomplete = autocomplete;
-    wrapper.instance().handleKey({target: {value: "alama"}});
+    wrapper.instance().handleArrow({target: {value: "alama"}});
 
     expect(autocomplete).to.have.property('callCount', 1);
 });
